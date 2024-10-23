@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             duration: 1.5
         })
         .to(".logo-preloader", {
-            y: isMobile ? -400 : -300,
+            y: isMobile ? -350 : -300,
             ease: "power4.inOut",
             duration: 1
         })
