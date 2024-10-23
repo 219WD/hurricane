@@ -933,6 +933,7 @@ ul.social-icons svg:hover {
     }
 
     .footer-content .logo2 {
+        display: flex;
         position: static;
         transform: none;
         opacity: 1;
