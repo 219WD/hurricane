@@ -761,11 +761,11 @@ ul.social-icons svg:hover {
         width: 80%; /* Ajuste para dispositivos móviles */
     }
     
-    .logo2 svg {
+    nav .logo2 svg {
         display: none;
     }
 
-    .logo2 h5 {
+    nav .logo2 h5 {
         display: none;
 
     }
