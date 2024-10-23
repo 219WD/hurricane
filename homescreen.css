@@ -1,0 +1,960 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html,
+.container {
+    width: 100%;
+    height: 100%;
+    font-family: "Space Grotesk", sans-serif;
+    scroll-behavior: auto;
+}
+
+.container {
+    position: relative;
+}
+
+.container-preloader {
+    position: fixed; /* Fijo para centrar correctamente */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    z-index: 1001;
+}
+
+.logo-preloader svg {
+    width: 500px; /* Asegura que use todo el espacio disponible */
+    height: auto; /* Mantén la proporción del SVG */
+    overflow: visible;
+    transition: clip-path 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: transparent;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    color: #fff;
+}
+
+#navBar.hide {
+    top: -100px;
+    /* Ajusta según la altura de tu nav */
+}
+
+nav .logo svg {
+    fill: white;
+    width: 100px;
+    height: auto;
+}
+
+/* Animación escalonada para .logo2 */
+.logo2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transition: clip-path 1s ease-in-out, opacity 1s ease-in-out;
+    /* Añadido para animación escalonada */
+    animation: fadeInLogo 1.5s forwards ease-in-out;
+    animation-delay: 0.3s;
+}
+
+.logo2.show {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+}
+
+@keyframes fadeInLogo {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animación escalonada para los <li> del menú */
+nav ul li {
+    position: relative;
+    opacity: 0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out, clip-path 0.8s ease-in-out;
+}
+
+nav ul li:nth-child(1) {
+    transition-delay: 0.2s;
+}
+
+nav ul li:nth-child(2) {
+    transition-delay: 0.3s;
+}
+
+nav ul li:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+nav ul li:nth-child(4) {
+    transition-delay: 0.5s;
+}
+
+nav ul li.show {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logo2 svg {
+    width: 50px;
+    height: 50px;
+    fill: white;
+}
+
+.logo2 h5 {
+    font-size: 1.5rem;
+    margin: 0;
+    line-height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5em;
+    margin-top: 2rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.hamburger {
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
+    height: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    backdrop-filter: blur(10px);
+}
+
+.mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.mobile-menu ul li {
+    margin: 2rem 0;
+}
+
+.mobile-menu ul li a {
+    font-size: 2rem;
+    color: white;
+}
+
+.container header {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background:
+        linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 70%),
+        url("/assets/01.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #c05716;
+    padding: 1rem 3rem;
+}
+
+.title {
+    font-size: 5rem;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    /* Para ocultar el texto cuando se hace la animación */
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    /* Inicialmente oculto */
+    transition: clip-path 1s ease-in-out;
+}
+
+.text-fill {
+    color: #ffffff;
+    display: inline-block;
+    transform: translateY(100%);
+    /* Posicionar el texto por debajo */
+}
+
+
+header .paragraph {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    /* Para ocultar el texto cuando se hace la animación */
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    /* Inicialmente oculto */
+    transition: clip-path 1s ease-in-out;
+    color: #fff;
+}
+
+/* From Uiverse.io by cssbuttons-io */
+button {
+    position: relative;
+    overflow: hidden;
+    /* Para ocultar el texto cuando se hace la animación */
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    /* Inicialmente oculto */
+    transition: clip-path 1s ease-in-out;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    margin-top: 1rem;
+}
+
+button.learn-more {
+    width: 12rem;
+    height: auto;
+}
+
+button.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #c05716;
+    border-radius: 1.625rem;
+}
+
+button.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+}
+
+button.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+button.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #c05716;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+button:hover .circle {
+    width: 100%;
+}
+
+button:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+}
+
+button:hover .button-text {
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main__scroll-text {
+    color: #c05716;
+    position: relative;
+    overflow: hidden;
+    /* Para ocultar el texto cuando se hace la animación */
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    /* Inicialmente oculto */
+    transition: clip-path 1s ease-in-out;
+}
+
+.main__action {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 1000;
+}
+
+.main__action:hover .main__scroll-box {
+    animation: scroll-down 3s infinite;
+}
+
+/* Animate scroll icon */
+@keyframes scroll-down {
+
+    0%,
+    100% {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+
+    35% {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+
+    70% {
+        transform: translateY(-1rem);
+        opacity: 0;
+    }
+}
+
+.section-container {
+    width: 100vw;
+    height: 200vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    background:
+        linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 30%),
+        linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 30%),
+        url("/assets/04.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #c05716;
+    padding: 1rem;
+}
+
+.section-container .subtitle {
+    font-size: 3.5rem;
+    font-weight: 700;
+    padding-right: 3rem;
+    padding-top: 2rem;
+    color: #ffffff;
+    position: relative;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que las tarjetas se ajusten a la siguiente fila si el espacio es insuficiente */
+    gap: 2rem;
+    /* Espacio entre las tarjetas (opcional, pero limpio) */
+    margin: auto;
+
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #c05716;
+    width: 20rem;
+    height: 30rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    /* Asegura que los elementos no se desborden de la tarjeta */
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    /* Ajusta la altura del degradado */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    /* Degradado de negro a transparente */
+    z-index: 1;
+    /* Asegura que esté por encima de la imagen pero debajo del texto */
+    pointer-events: none;
+    /* Para que no interfiera con la interacción de la tarjeta */
+}
+
+.card:nth-child(1) {
+    margin-top: 15rem;
+    /* Sin margen superior para la primera tarjeta */
+}
+
+.card:nth-child(2) {
+    margin-top: 10rem;
+    /* Segunda tarjeta más abajo */
+}
+
+.card:nth-child(3) {
+    margin-top: 5rem;
+    /* Tercera tarjeta más abajo */
+}
+
+.card:nth-child(4) {
+    margin-top: 0;
+    /* Cuarta tarjeta más abajo */
+}
+
+
+.paragraph-card {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 2rem;
+    line-height: 1;
+    z-index: 2;
+    /* Asegura que el texto esté por encima del degradado */
+    padding: 1rem;
+    color: #c05716;
+    /* Blanco para que el texto resalte sobre el degradado */
+}
+
+.photo-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    /* Coloca la imagen detrás del degradado */
+}
+
+.section-2-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Mueve los elementos hacia la parte superior */
+    background:
+        linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%),
+        linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%),
+        url("/assets/08.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 3rem;
+    position: relative;
+}
+
+.section-2-container .section-2-card {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    position: relative;
+    margin-top: 2rem;
+    /* Ajusta la distancia desde la parte superior */
+}
+
+.section-2-container .title {
+    font-size: 5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: right;
+    width: 50vw;
+    margin-top: 2rem;
+    /* Ajusta la distancia desde la parte superior */
+}
+
+
+.section-2-container .subtitle {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.section-2-card .paragraph {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: #fff;
+    width: 35vw;
+    transition: clip-path 1s ease-in-out;
+}
+
+.section-3-container {
+    width: 100vw;
+    height: 300vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background:
+        linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 30%),
+        linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 30%),
+        url("/assets/04.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 1rem;
+    position: relative;
+}
+
+.section-3-container .title {
+    font-size: 5rem;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    /* Para ocultar el texto cuando se hace la animación */
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    /* Inicialmente oculto */
+    transition: clip-path 1s ease-in-out;
+    color: #f0f0f0;
+}
+
+.section-3-container .paragraph.small {
+    font-size: 1.2rem;
+    color: #ffffff;
+    width: 40vw;
+}
+
+.section-3-card svg {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.section-3-card svg path {
+    fill: #fff;
+    /* SVG inicialmente blanco */
+}
+
+.section-3-card-reverse {
+    transform: translateY(0);
+    /* Esto será sobreescrito por GSAP */
+    transition: all 0.5s ease;
+}
+
+.section-3-card-reverse svg {
+    position: absolute;
+    left: 0;
+    margin-top: 10rem;
+}
+
+.section-3-card-reverse svg path {
+    fill: #fff;
+    /* SVG inicialmente blanco */
+}
+
+.section-3-container .paragraph-reverse.small {
+    position: absolute;
+    right: 0;
+    top: 63%;
+    font-size: 1.2rem;
+    color: #ffffff;
+    width: 40vw;
+    padding: 0 3rem;
+    text-align: right;
+}
+
+.section-3-container .title.reverse-title {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    text-align: right;
+    padding: 3rem;
+}
+
+
+footer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Mueve los elementos hacia la parte superior */
+    background:
+        linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%),
+        linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%),
+        url("/assets/06.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 3rem;
+    position: relative;
+    color: #fff;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Tres columnas de igual tamaño */
+    gap: 20px;
+    /* Espacio entre las columnas */
+    border: 1px solid #c05716;
+    width: 100%;
+    height: 85vh;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    padding: 3rem;
+}
+
+.footer-content .logo2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transition: clip-path 1s ease-in-out, opacity 1s ease-in-out;
+    /* Añadido para animación escalonada */
+    animation: fadeInLogo 1.5s forwards ease-in-out;
+    animation-delay: 0.3s;
+}
+
+.footer-content .logo2.show {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+}
+
+.footer-column {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-column.social {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+ul.social-icons {
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+ul.social-icons li {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+ul.social-icons svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+}
+
+ul.social-icons li:hover {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    border: 1px solid #c05716;
+}
+
+ul.social-icons svg:hover {
+    width: 24px;
+    height: 24px;
+    fill: #c05716;
+}
+
+.contact ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 5rem;
+}
+
+.contact ul li a {
+    text-decoration: none;
+    color: #fff;
+    animation: color 1s ease;
+}
+
+.contact ul li a:hover {
+    text-decoration: underline;
+    color: #c05716;
+}
+
+@media (max-width: 768px) {
+    .logo-preloader svg {
+        width: 80%; /* Ajuste para dispositivos móviles */
+    }
+    
+    .logo2 svg {
+        display: none;
+    }
+
+    .logo2 h5 {
+        display: none;
+
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        font-size: 2rem;
+        z-index: 99;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .title {
+        font-size: 3.5rem;
+        line-height: 3.5rem;
+    }
+
+    .section-container .subtitle {
+        font-size: 2.8rem;
+    }
+
+    .cards {
+        flex-direction: column;
+        margin-top: 5rem;
+    }
+
+    .card {
+        width: 15rem;
+        /* Ancho completo en móviles */
+        height: 20rem;
+        /* Ajusta la altura para que sea proporcional */
+    }
+
+    .card:nth-child(1),
+    .card:nth-child(2),
+    .card:nth-child(3),
+    .card:nth-child(4) {
+        margin-top: 0;
+    }
+
+    /* Ajustes opcionales: si quieres que las tarjetas estén un poco desalineadas */
+    .card:nth-child(2),
+    .card:nth-child(4) {
+        margin-left: 10%;
+    }
+
+    .section-2-container {
+        flex-direction: column-reverse;
+        height: auto;
+    }
+
+    .section-2-container .title {
+        font-size: 3.3rem;
+        width: 80vw;
+        margin-top: 3rem;
+    }
+
+
+    .section-2-container .subtitle {
+        font-size: 2.7rem;
+        width: 80vw;
+    }
+
+    .section-2-card .paragraph {
+        width: 80vw;
+    }
+
+    .section-3-container {
+        height: 250vh;
+        padding-top: 5rem;
+    }
+
+    .section-3-container .title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        position: relative;
+        overflow: hidden;
+        /* Para ocultar el texto cuando se hace la animación */
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+        /* Inicialmente oculto */
+        transition: clip-path 1s ease-in-out;
+        color: #f0f0f0;
+    }
+
+    .section-3-container .paragraph.small {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+        width: 80vw;
+    }
+
+    .section-3-card svg {
+        position: absolute;
+        right: 0;
+        top: 20rem;
+        width: 400px;
+    }
+
+    .section-3-card svg path {
+        fill: #fff;
+        /* SVG inicialmente blanco */
+    }
+
+    .section-3-card-reverse {
+        transform: translateY(0);
+        transition: all 0.5s ease;
+    }
+
+    .section-3-card-reverse svg {
+        position: absolute;
+        right: 0;
+        top: 5rem;
+        width: 400px;
+    }
+
+    .section-3-card-reverse svg path {
+        fill: #fff;
+    }
+
+    .section-3-container .paragraph-reverse.small {
+        top: 68%;
+        font-size: 1.5rem;
+        width: 90vw;
+    }
+
+    .section-3-container .title.reverse-title {
+        top: 60%;
+    }
+
+    footer {
+        padding: 1.5rem;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-content {
+        height: auto;
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    .footer-column {
+        width: 100%;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .footer-column.social {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+        /* Añadido espacio superior */
+    }
+
+    .footer-content .logo2 {
+        position: static;
+        transform: none;
+        opacity: 1;
+        /* Mostrar logo sin animación */
+        clip-path: none;
+        /* Elimina la máscara */
+        margin-bottom: 2rem;
+        /* Espacio para separar del contenido */
+    }
+
+    .contact ul {
+        flex-direction: column;
+        gap: 1rem;
+        /* Menor espacio entre los enlaces */
+        position: static;
+        transform: none;
+        bottom: auto;
+        text-align: center;
+    }
+
+    ul.social-icons {
+        justify-content: center;
+        /* Centra los íconos sociales */
+    }
+}
